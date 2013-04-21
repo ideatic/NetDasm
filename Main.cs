@@ -10,9 +10,9 @@ using System.Text.RegularExpressions;
 
 namespace NetDasm
 {
-    public partial class Principal : Form
+    public partial class Main : Form
     {
-        public Principal()
+        public Main()
         {
             InitializeComponent();
             this.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Application.ExecutablePath);
@@ -21,17 +21,17 @@ namespace NetDasm
         AssemblyDefinition assembly;
         private void loadAssemblyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                assembly = AssemblyFactory.GetAssembly(openFileDialog1.FileName);
+                assembly = AssemblyFactory.GetAssembly(openFileDialog.FileName);
                 LoadAssembly();
             }
         }
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                AssemblyFactory.SaveAssembly(assembly, saveFileDialog1.FileName);
+                AssemblyFactory.SaveAssembly(assembly, saveFileDialog.FileName);
             }
         }
 
@@ -172,6 +172,11 @@ Instrucciones: {3}", metodo.Name, metodo.ReturnType.ReturnType.Name, metodo.Para
         {
             CodeToIl window = new CodeToIl();
             window.Show();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new About().ShowDialog();
         }
     }
 }

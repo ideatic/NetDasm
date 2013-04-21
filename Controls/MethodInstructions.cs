@@ -43,7 +43,7 @@ namespace NetDasm.Controls
                     contador++;
                 }
             }
-            else MessageBox.Show("The method body is empty");
+            else MessageBox.Show("The method body is empty!");
         }
 
         public void RemoveSelected()
@@ -133,7 +133,15 @@ namespace NetDasm.Controls
                 int valor;
                 if (int.TryParse(insert.textBox1.Text, out valor))
                 {
-                    sentence = worker.Create(opcode, valor);
+                    if (opcode.OperandType == OperandType.ShortInlineI)
+                    {
+                        sbyte x = (sbyte) valor;
+                        sentence = worker.Create(opcode, x);
+                    }
+                    else
+                    {
+                        sentence = worker.Create(opcode, valor);
+                    }
                 }
                 else
                 {

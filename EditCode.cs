@@ -14,8 +14,9 @@ namespace NetDasm
 {
     public partial class EditCode : Form
     {
-        AssemblyDefinition assembly;
-        MethodDefinition method;
+        private AssemblyDefinition assembly;
+        private MethodDefinition method;
+
         public EditCode(MethodDefinition metodo, AssemblyDefinition assembly)
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace NetDasm
             methodInstructions1.assembly = assembly;
             methodInstructions1.method = metodo;
             methodInstructions1.labelInfo = label1;
-            methodInstructions1.Load();            
+            methodInstructions1.Load();
         }
 
 
@@ -61,12 +62,12 @@ namespace NetDasm
                 InsertInstruction insert = new InsertInstruction(method.Body.Instructions.Count - 1);
                 insert.numericUpDown1.Value = methodInstructions1.SelectedIndex;
                 insert.comboBox1.SelectedItem = methodInstructions1.SelectedInstruction.OpCode.Code.ToString();
-                if(methodInstructions1.SelectedInstruction.Operand!=null)
-                insert.textBox1.Text = methodInstructions1.SelectedInstruction.Operand.ToString();
-            insert.button1.Text = "Modify";
+                if (methodInstructions1.SelectedInstruction.Operand != null)
+                    insert.textBox1.Text = methodInstructions1.SelectedInstruction.Operand.ToString();
+                insert.button1.Text = "Modify";
                 insert.ShowDialog();
 
-                if (insert.DialogResult==DialogResult.OK)
+                if (insert.DialogResult == DialogResult.OK)
                 {
                     methodInstructions1.RemoveSelected();
                     methodInstructions1.InsertInstruction(insert);
